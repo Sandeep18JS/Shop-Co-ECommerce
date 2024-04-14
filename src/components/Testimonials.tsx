@@ -4,7 +4,7 @@ import { GoCheckCircleFill } from "react-icons/go";
 import { cn } from "../../util/cn";
 import React, { useEffect, useState } from "react";
 
-export const Testimonilas = ({
+export const Testimonials = ({
   items,
   direction = "left",
   speed = "fast",
