@@ -74,7 +74,7 @@ const Footer = (props: Props) => {
         </div>
         <div className="lg:w-[1260px] border lg:mt-12 mx-auto relative bottom-10 lg:bottom-0"></div>
         <p className="font-satoshi text-gray-400 lg:mt-8 ml-8 lg:ml-32">
-          Shop.co © 2000-2021, All rights reserved
+          Shop.co © 2000-2024, All rights reserved
         </p>
       </div>
     </div>

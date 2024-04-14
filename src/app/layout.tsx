@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ClerkProvider } from "@clerk/nextjs";
+import Cartprovider from "@/components/Providers";
+import ShoppingCartModal from "@/components/ShoppingCartModal";
 
 export const metadata: Metadata = {
   title: "Shop Co",
@@ -18,9 +20,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ClerkProvider>
-          <Navbar />
-          {children}
-          <Footer />
+          <Cartprovider>
+            <Navbar />
+            <ShoppingCartModal />
+            {children}
+            <Footer />
+          </Cartprovider>
         </ClerkProvider>
       </body>
     </html>

@@ -2,8 +2,10 @@ import Banner from "@/components/Banner";
 import Hero from "@/components/Hero";
 import NewArrivals from "@/components/NewArrivals";
 import Styles from "@/components/Styles";
-import { Testimonilas } from "@/components/Testimonials";
+// import { Testimonilas } from "@/components/Testimonials";
 import TopSelling from "@/components/TopSelling";
+
+export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
@@ -13,7 +15,7 @@ export default function Home() {
       <NewArrivals />
       <TopSelling />
       <Styles />
-      <Testimonilas items={testimonials} direction="right" speed="slow" />
+      {/* <Testimonilas items={testimonials} direction="right" speed="slow" /> */}
     </>
   );
 }

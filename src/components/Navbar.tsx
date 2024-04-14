@@ -9,8 +9,15 @@ import { IoClose } from "react-icons/io5";
 import { BsChevronDown } from "react-icons/bs";
 import { useUser } from "@clerk/nextjs";
 import { UserButton } from "@clerk/nextjs";
+import { useShoppingCart } from "use-shopping-cart";
 
 type Props = {};
+
+const links = [
+  { name: "Men", href: "/Men" },
+  { name: "Women", href: "/Women" },
+  { name: "Children", href: "/Children" },
+];
 
 const Navbar = (props: Props) => {
   const { isSignedIn } = useUser();
@@ -18,6 +25,7 @@ const Navbar = (props: Props) => {
   const [menu, setMenu] = useState(false);
   const [list, setList] = useState(false);
   const [profile, setProfile] = useState(false);
+  const { handleCartClick } = useShoppingCart()
 
   const handleClick = () => {
     setVisible(!visible);
@@ -54,33 +62,46 @@ const Navbar = (props: Props) => {
         ""
       )}
       <div className="mx-auto w-full lg:w-[1240px]  lg:h-[48px] flex gap-4 lg:gap-[40px] lg:mt-[24px] lg:mb-[24px] my-4">
-        <div onClick={handleMenu} className="lg:hidden mt-1 ml-1">
+        <div onClick={handleMenu} className="lg:hidden mt-1 ">
           {menu ? (
             <IoClose className="w-6 h-6 relative top-[4px] cursor-pointer" />
           ) : (
             <LuMenu className="w-6 h-6 relative top-[4px] cursor-pointer" />
           )}
-          {menu ? (
-            <div className="absolute top-[115px] left-4  font-satoshi font-medium  rounded-md">
-              <ul className="  text-[14px] flex  justify-center items-center gap-[16px] ">
-                <li>
-                  <Link href="/shop">Shop</Link>
-                </li>
-                <li>
-                  <Link href="/onsale">On Sale</Link>
-                </li>
-                <li>
-                  <Link href="/newarrivals">New Arrivals</Link>
-                </li>
-                <li>
-                  <Link href="/brands">Brands</Link>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            ""
-          )}
         </div>
+        {menu ? (
+          <div className="absolute top-[100px]  font-satoshi  space-y-4 p-4 bg-black text-white w-full">
+            <ul className="text-[14px] flex justify-center items-center gap-[16px] ">
+              <li onClick={handleList}>Shop</li>
+              <li>
+                <Link href="/onsale">On Sale</Link>
+              </li>
+              <li>
+                <Link href="/newarrivals">New Arrivals</Link>
+              </li>
+              <li>
+                <Link href="/brands">Brands</Link>
+              </li>
+            </ul>
+            {list ? (
+              <div className=" font-satoshi   rounded-md">
+                <ul className=" text-[14px] flex  justify-center items-center gap-[16px]  ">
+                  {links.map((link, id) => (
+                    <li key={id}>
+                      <Link className="hover:underline" href={link.href}>
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        ) : (
+          ""
+        )}
         <h1 className="text-[25px] lg:text-[32px] font-black font-plein">
           <Link href="/">SHOP.CO</Link>
         </h1>
@@ -90,17 +111,15 @@ const Navbar = (props: Props) => {
             <BsChevronDown className="relative top-1.5 left-1" />
           </li>
           {list ? (
-            <div className="absolute top-[100px] left-[275px]  font-satoshi   rounded-md">
-              <ul className="  flex flex-col w-28 h-32 justify-center items-center gap-[14px] rounded-md  underline">
-                <li>
-                  <Link href="/shop/men">Men</Link>
-                </li>
-                <li>
-                  <Link href="/shop/women">Women</Link>
-                </li>
-                <li>
-                  <Link href="/shop/children">Children</Link>
-                </li>
+            <div className="absolute top-[100px] left-[285px]  font-satoshi   rounded-md">
+              <ul className="  flex flex-col w-28 h-32 justify-center items-center gap-[14px] rounded-md  ">
+                {links.map((link, id) => (
+                  <li key={id}>
+                    <Link className="hover:underline" href={link.href}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           ) : (
@@ -118,7 +137,7 @@ const Navbar = (props: Props) => {
           <FiSearch className="w-6 h-6 absolute top-[7px] lg:left-5 left-[137px] lg:text-[#909090]" />
         </div>
         <div className="flex gap-4 justify-center items-center ml-40 lg:ml-0">
-          <PiShoppingCartSimpleBold className="w-6 h-6 cursor-pointer" />
+          <PiShoppingCartSimpleBold className="w-6 h-6 cursor-pointer" onClick={() => handleCartClick()} />
           {isSignedIn ? (
             <UserButton afterSignOutUrl="/" />
           ) : (
