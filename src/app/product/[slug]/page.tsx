@@ -4,6 +4,8 @@ import CheckOutNow from "@/components/CheckOutNow";
 import ImageGallery from "@/components/ImageGallery";
 import { fullProduct } from "@/components/interface";
 
+export const revalidate = 30;
+
 async function getData(slug: string) {
   const query = `*[_type == "product" && slug.current == "${slug}"][0]   {
         _id,

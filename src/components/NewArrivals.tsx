@@ -4,6 +4,8 @@ import React from "react";
 import { simplifiedProduct } from "./interface";
 import Link from "next/link";
 
+export const revalidate = 30;
+
 async function getData() {
   const query = `*[_type == "product"][0...4] | order(_createdAt asc){
     _id,

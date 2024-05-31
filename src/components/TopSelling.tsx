@@ -6,6 +6,8 @@ import Link from "next/link";
 
 type Props = {};
 
+export const revalidate = 30;
+
 async function getData() {
   const query = `*[_type == "product"][0...4] | order(priority desc, _updatedAt desc) {
     _id,
